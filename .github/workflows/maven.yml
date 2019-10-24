@@ -1,0 +1,22 @@
+name: Todo Build
+
+on: [push, pull_request]
+
+env:
+  KEYVAULT_URL : ${{secrets.KEYVAULT_URL}}
+  KEYVAULT_CLIENT_ID: ${{secrets.KEYVAULT_CLIENT_ID}}
+  KEYVAULT_CLIENT_KEY: ${{secrets.KEYVAULT_CLIENT_KEY}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+         name: emcconne/todo-management-spring-boot
+         username: ${{ secrets.DOCKER_USERNAME }}
+         password: ${{ secrets.DOCKER_PASSWORD }}
+         buildargs: KEYVAULT_URL=${{secrets.KEYVAULT_URL}},CLIENT_ID=${{secrets.KEYVAULT_CLIENT_ID}},CLIENT_KEY=${{secrets.KEYVAULT_CLIENT_KEY}}
