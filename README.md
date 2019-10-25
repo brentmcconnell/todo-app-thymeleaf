@@ -16,12 +16,25 @@ This tutorial will "likely" run fine on a Windows workstation but was developed 
 ## Common Installation Instructions
 
 1.  Create Azure MySQL instance
+```
+az mysql server create -l <region>          \
+    -g <resource-group> -n <db-server-name> \
+    -u <username> -p <password>             \
+    --sku GP_Gen5_2                         \
+    --ssl-enforcement Disabled 
+```
 2.  Create a database in MySQL instance named __todo__
-3.  Create Azure Cache for Redis service in Azure
-4.  Modify Azure Cache for Redis in Advanced Settings to include 'Egx' in
-    notify-keyspace-events field.  This is used by the Spring framework.  Also
-ensure that Non-SSL port of 6379 is open and accessible.  This is not secure so
-you can choose SSL only but that configuration is not covered here
+```
+az mysql db create -n todo -g <resource-group> \
+    --server-name <db-server-name> 
+```
+3.  Create Azure Cache for Redis service in Azure.  Must have 'notify-keyspace-events' set.
+```
+ az redis create -g <resource-group> -l <region> \
+    -n <redis-server-name> --sku Standard --vm-size c0 \
+    --enable-non-ssl-port \
+    --redis-configuration '{"notify-keyspace-events":"Egx"}'
+```
 3.  Create Azure keyvault
 ```
 az keyvault create --name <your_keyvault_name>            \
