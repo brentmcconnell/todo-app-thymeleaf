@@ -28,7 +28,7 @@ az mysql server create -l <region>          \
 az mysql db create -n todo -g <resource-group> \
     --server-name <db-server-name> 
 ```
-3.  Create Azure Cache for Redis service in Azure.  Must have 'notify-keyspace-events' set.
+3.  Create Azure Cache for Redis service in Azure.  Must have 'notify-keyspace-events' set.  NOTE: This cannot be set on Basic plans.
 ```
  az redis create -g <resource-group> -l <region> \
     -n <redis-server-name> --sku Standard --vm-size c0 \
