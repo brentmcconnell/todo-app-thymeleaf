@@ -35,7 +35,7 @@ az mysql db create -n todo -g <resource-group> \
     --enable-non-ssl-port \
     --redis-configuration '{"notify-keyspace-events":"Egx"}'
 ```
-3.  Create Azure keyvault
+4.  Create Azure keyvault
 ```
 az keyvault create --name <your_keyvault_name>            \
                    --resource-group <your_resource_group> \
@@ -45,17 +45,17 @@ az keyvault create --name <your_keyvault_name>            \
                    --enabled-for-template-deployment true \
                    --sku standard 
 ```
-4. Create service principal
+5. Create service principal
 ```
 az ad sp create-for-rbac --name <your_azure_service_principal_name>
 ```
-5. Set Permission for service principal on Keyvault
+6. Set Permission for service principal on Keyvault
 ```
 az keyvault set-policy --name <your_keyvault_name>   \
                        --secret-permission get list  \
                        --spn <your_sp_id_created_above>
 ```
-6.  Set secrets for MySQL and Redis in Keyvault. Use the specific __name__ values given below. 
+7.  Set secrets for MySQL and Redis in Keyvault. Use the specific __name__ values given below. 
 ```
 # Change the --value(s) to reflect your Azure MySQL connection information
 az keyvault secret set --name spring-datasource-url                          \
@@ -112,9 +112,7 @@ KEYVAULT_CLIENT_KEY=<service.principal.key>
 
 2.  Modify your Maven settings.xml file to include a
 <serverId> section to authenticate with Azure. See [this
-page](https://docs.microsoft.com/en-us/java/azure/spring-framework/deploy-contai
-nerized-spring-boot-java-app-with-maven-plugin?view=azure-java-stable#configure-
-maven-to-use-your-azure-service-principal) for more information about setting
+page](https://docs.microsoft.com/en-us/java/azure/spring-framework/deploy-containerized-spring-boot-java-app-with-maven-plugin?view=azure-java-stable#configure-maven-to-use-your-azure-service-principal) for more information about setting
 this up.
 
 3.  Modify the pom.xml file to include the <authentication> section in the
