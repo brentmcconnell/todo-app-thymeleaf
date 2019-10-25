@@ -9,7 +9,7 @@ It uses Spring Boot to create a basic Todo App that has a Azure MySQL backend
 and uses Redis cache for session management. It also has a very basic Spring
 Security configuration that will evolve over time. As currently configured you
 will also need to use an Azure KeyVault to store the datasource url and username
-and password to MySQL and also set some environment variables.
+and password to MySQL and Redis and also set some environment variables.
 
 This tutorial will "likely" run fine on a Windows workstation but was developed and tested on Mac/Linux.
 
