@@ -1,4 +1,4 @@
-# basic-todo-app
+# todo-app-aks-demo
 
 This app is based off of a tutorial available at [Java
 Guides](http://www.javaguides.net/2018/09/mini-todo-management-project-using-spring-boot-springmvc-springsecurity-jsp-hibernate-mysql.html). It has been
